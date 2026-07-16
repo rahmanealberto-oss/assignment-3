@@ -3,21 +3,23 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { addItem } from "@/lib/items";
+import type { CategoryValue } from "@/lib/types";
+import { CATEGORIES } from "@/lib/categories";
 import Button from "./Button";
 
 type FormState = {
   title: string;
   description: string;
+  category: CategoryValue;
   wantedInExchange: string;
-  imageUrl: string;
   contact: string;
 };
 
 const INITIAL_STATE: FormState = {
   title: "",
   description: "",
+  category: "electronica",
   wantedInExchange: "",
-  imageUrl: "",
   contact: "",
 };
 
@@ -27,10 +29,10 @@ export default function ItemForm() {
   const [error, setError] = useState<string | null>(null);
 
   function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }) as FormState);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -44,8 +46,8 @@ export default function ItemForm() {
     addItem({
       title: form.title.trim(),
       description: form.description.trim(),
+      category: form.category,
       wantedInExchange: form.wantedInExchange.trim(),
-      imageUrl: form.imageUrl.trim(),
       contact: form.contact.trim(),
     });
 
@@ -55,9 +57,9 @@ export default function ItemForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900"
+      className="glass flex flex-col gap-6 rounded-2xl p-8 md:p-10"
     >
-      <Field label="Título del bien" htmlFor="title">
+      <Field label="Título del artículo" htmlFor="title">
         <input
           id="title"
           name="title"
@@ -67,6 +69,22 @@ export default function ItemForm() {
           placeholder="Ej. Bicicleta de montaña rodada 26"
           className={inputClasses}
         />
+      </Field>
+
+      <Field label="Categoría" htmlFor="category">
+        <select
+          id="category"
+          name="category"
+          value={form.category}
+          onChange={handleChange}
+          className={inputClasses}
+        >
+          {CATEGORIES.map((c) => (
+            <option key={c.value} value={c.value}>
+              {c.label}
+            </option>
+          ))}
+        </select>
       </Field>
 
       <Field label="Descripción" htmlFor="description">
@@ -93,18 +111,6 @@ export default function ItemForm() {
         />
       </Field>
 
-      <Field label="URL de una imagen (opcional)" htmlFor="imageUrl">
-        <input
-          id="imageUrl"
-          name="imageUrl"
-          type="url"
-          value={form.imageUrl}
-          onChange={handleChange}
-          placeholder="https://..."
-          className={inputClasses}
-        />
-      </Field>
-
       <Field label="Cómo contactarte (opcional)" htmlFor="contact">
         <input
           id="contact"
@@ -117,12 +123,10 @@ export default function ItemForm() {
         />
       </Field>
 
-      {error && (
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-      )}
+      {error && <p className="text-sm text-red-500">{error}</p>}
 
-      <div className="flex items-center gap-3 pt-2">
-        <Button type="submit">Publicar bien</Button>
+      <div className="flex items-center gap-4 pt-2">
+        <Button type="submit">Publicar artículo</Button>
         <Button href="/" variant="secondary">
           Cancelar
         </Button>
@@ -141,10 +145,10 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       <label
         htmlFor={htmlFor}
-        className="text-sm font-medium text-zinc-800 dark:text-zinc-200"
+        className="text-xs font-medium uppercase tracking-widest text-muted"
       >
         {label}
       </label>
@@ -154,4 +158,4 @@ function Field({
 }
 
 const inputClasses =
-  "rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition-colors focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-50 dark:focus:border-zinc-50";
+  "rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-base text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-accent";
