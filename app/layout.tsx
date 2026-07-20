@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -26,14 +21,16 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
+      className={`${jakarta.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
+      <body className="flex min-h-full flex-col bg-background font-sans text-foreground md:flex-row">
         <Navbar />
-        {children}
-        <footer className="border-t border-border px-6 py-10 text-center text-sm text-muted">
-          Intercambio de Bienes — proyecto académico de trueque local, sin fines comerciales.
-        </footer>
+        <div className="flex min-h-full flex-1 flex-col">
+          <main className="flex flex-1 flex-col">{children}</main>
+          <footer className="border-t border-border px-6 py-8 text-center text-xs text-muted">
+            Intercambio de Bienes — proyecto académico de trueque local, sin fines comerciales.
+          </footer>
+        </div>
       </body>
     </html>
   );

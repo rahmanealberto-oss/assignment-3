@@ -25,13 +25,13 @@ type ButtonProps = ButtonAsLink | ButtonAsButton;
 
 const VARIANT_CLASSES: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "glow-hover bg-gradient-to-r from-accent to-accent-2 text-accent-foreground",
+    "lift-hover shadow-accent shadow-accent-hover bg-gradient-to-r from-accent to-accent-2 text-accent-foreground",
   secondary:
-    "glass text-foreground hover:border-accent",
+    "lift-hover border border-border bg-surface text-foreground hover:border-accent/50 hover:bg-surface-2",
 };
 
 const BASE_CLASSES =
-  "inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0";
 
 export default function Button({
   children,

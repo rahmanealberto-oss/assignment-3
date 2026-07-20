@@ -49,14 +49,14 @@ export default function Home() {
   }, [items, query]);
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="animate-in flex flex-1 flex-col">
       <section className="relative overflow-hidden border-b border-border">
         <div
-          className="animate-float-a absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/30 blur-3xl"
+          className="animate-float-a absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl"
           aria-hidden
         />
         <div
-          className="animate-float-b absolute -right-24 top-10 h-80 w-80 rounded-full bg-accent-2/25 blur-3xl"
+          className="animate-float-b absolute -right-24 top-10 h-80 w-80 rounded-full bg-accent-2/15 blur-3xl"
           aria-hidden
         />
 
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {HOW_IT_WORKS.map((step, i) => (
-              <div key={step.title} className="glass rounded-2xl p-6">
+              <div key={step.title} className="lift-hover shadow-soft rounded-2xl border border-border bg-surface p-6">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-2 font-display text-sm font-bold text-accent-foreground">
                   {i + 1}
                 </span>
@@ -146,7 +146,7 @@ export default function Home() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar un artículo…"
-              className="w-full max-w-xs rounded-lg border border-border bg-surface-2 px-4 py-2 text-sm text-foreground outline-none placeholder:text-muted/70 focus:border-accent"
+              className="focus-ring w-full max-w-xs rounded-xl border border-border bg-surface-2 px-4 py-2 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted/70"
             />
           </div>
           <ItemList items={filtered} />
@@ -158,7 +158,7 @@ export default function Home() {
 
 function StatChip({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass rounded-xl px-5 py-4">
+    <div className="shadow-soft rounded-xl border border-border bg-surface px-5 py-4">
       <p className="font-display text-xl font-bold text-foreground">{value}</p>
       <p className="mt-1 text-xs text-muted">{label}</p>
     </div>

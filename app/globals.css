@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
-/* Design system — futurista / fintech operativo */
+/* Design system — premium dashboard (Linear x Vercel) */
 :root {
-  --background: #f3f4fb;
-  --foreground: #0b0d1a;
-  --accent: #6d5bfa;
-  --accent-2: #22d3ee;
+  --background: #f7f7fb;
+  --foreground: #12121a;
+  --accent: #6c5ce7;
+  --accent-2: #2f6fed;
+  --accent-mint: #0ea678;
   --accent-foreground: #ffffff;
   --surface: #ffffff;
-  --surface-2: #eceefc;
-  --border: #dcdff2;
-  --muted: #5c6080;
+  --surface-2: #f1f1f8;
+  --border: #e3e4ee;
+  --muted: #6b6d80;
 }
 
 @theme inline {
@@ -18,36 +19,34 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
+  --color-accent-mint: var(--accent-mint);
   --color-accent-foreground: var(--accent-foreground);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-border: var(--border);
   --color-muted: var(--muted);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-jakarta);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #090b14;
-    --foreground: #edeffb;
-    --accent: #8b7bff;
-    --accent-2: #34e5ff;
-    --accent-foreground: #06070d;
-    --surface: #12142d;
-    --surface-2: #171a30;
-    --border: #262a48;
-    --muted: #9599b8;
+    --background: #08090d;
+    --foreground: #f4f5fa;
+    --accent: #8b7cf6;
+    --accent-2: #4f8cff;
+    --accent-mint: #22e6a8;
+    --accent-foreground: #ffffff;
+    --surface: #0f1015;
+    --surface-2: #16171d;
+    --border: #212229;
+    --muted: #9294a3;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  background-image:
-    radial-gradient(ellipse 900px 500px at 15% -10%, color-mix(in oklab, var(--accent) 22%, transparent), transparent),
-    radial-gradient(ellipse 700px 500px at 100% 0%, color-mix(in oklab, var(--accent-2) 16%, transparent), transparent);
-  background-repeat: no-repeat;
 }
 
 /* Gradient headline text */
@@ -58,30 +57,54 @@ body {
   color: transparent;
 }
 
-/* Glass panel: translucent surface with blur, for cards/nav/forms */
+/* Translucent surface with blur — used only on sticky nav elements */
 .glass {
-  background: color-mix(in oklab, var(--surface) 78%, transparent);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 82%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-/* Soft glow used on primary actions and hovered cards */
-.glow {
+/* Soft ambient shadows for cards, premium/subtle rather than a hard drop shadow */
+.shadow-soft {
   box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent),
-    0 10px 40px -12px color-mix(in oklab, var(--accent) 65%, transparent);
+    0 1px 2px rgba(0, 0, 0, 0.28),
+    0 14px 32px -18px rgba(0, 0, 0, 0.55);
 }
 
-.glow-hover {
-  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-}
-
-.glow-hover:hover {
+.shadow-accent {
   box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent),
-    0 16px 50px -14px color-mix(in oklab, var(--accent) 70%, transparent);
-  transform: translateY(-2px);
+    0 2px 8px -2px rgba(0, 0, 0, 0.35),
+    0 16px 32px -14px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+.shadow-accent-hover:hover {
+  box-shadow:
+    0 4px 16px -4px rgba(0, 0, 0, 0.4),
+    0 26px 48px -18px color-mix(in oklab, var(--accent) 65%, transparent);
+}
+
+/* Hover elevation + press feedback, used on cards and buttons */
+.lift-hover {
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.28s ease,
+    background-color 0.28s ease;
+}
+
+.lift-hover:hover {
+  transform: translateY(-3px);
+}
+
+.lift-hover:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Soft focus ring for form fields */
+.focus-ring:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
 }
 
 /* Underline microinteraction for text links */
@@ -106,28 +129,58 @@ body {
   transform: scaleX(1);
 }
 
-/* Floating glow orbs, decorative background motion */
+/* Entrance animation, replayed on every route change for a smooth
+   transition between sections without a routing-transition library. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fade-in-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Subtle decorative glow, restrained version used behind the hero */
 @keyframes float-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -40px) scale(1.1); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(24px, -30px) scale(1.08);
+  }
 }
 
 @keyframes float-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-35px, 30px) scale(1.06); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-28px, 24px) scale(1.05);
+  }
 }
 
 .animate-float-a {
-  animation: float-a 12s ease-in-out infinite;
+  animation: float-a 14s ease-in-out infinite;
 }
 
 .animate-float-b {
-  animation: float-b 16s ease-in-out infinite;
+  animation: float-b 18s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-float-a,
-  .animate-float-b {
+  .animate-float-b,
+  .animate-in,
+  .lift-hover {
     animation: none;
+    transition: none;
   }
 }

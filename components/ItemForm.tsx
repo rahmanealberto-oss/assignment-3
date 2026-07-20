@@ -57,7 +57,7 @@ export default function ItemForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="glass flex flex-col gap-6 rounded-2xl p-8 md:p-10"
+      className="shadow-soft flex flex-col gap-6 rounded-2xl border border-border bg-surface p-8 md:p-10"
     >
       <Field label="Título del artículo" htmlFor="title">
         <input
@@ -158,4 +158,4 @@ function Field({
 }
 
 const inputClasses =
-  "rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-base text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-accent";
+  "focus-ring rounded-xl border border-border bg-surface-2 px-4 py-2.5 text-base text-foreground outline-none transition-all duration-200 placeholder:text-muted/60";

@@ -11,7 +11,7 @@ export default function ItemList({
 }) {
   if (items.length === 0) {
     return (
-      <div className="glass flex flex-col items-center gap-4 rounded-2xl border-dashed px-6 py-20 text-center">
+      <div className="shadow-soft flex flex-col items-center gap-4 rounded-2xl border border-dashed border-border bg-surface px-6 py-20 text-center">
         <svg
           viewBox="0 0 24 24"
           fill="none"

@@ -34,7 +34,7 @@ export default function ArticuloDetallePage() {
 
   if (item === null) {
     return (
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center gap-4 px-6 py-16 text-center">
+      <div className="animate-in mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center gap-4 px-6 py-16 text-center">
         <h1 className="font-display text-2xl font-semibold text-foreground">
           No encontramos ese artículo
         </h1>
@@ -55,7 +55,7 @@ export default function ArticuloDetallePage() {
   const category = getCategory(item.category);
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
+    <div className="animate-in mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
       <nav className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-muted">
         <Link href="/" className="underline-grow hover:text-accent">
           Inicio
@@ -66,7 +66,7 @@ export default function ArticuloDetallePage() {
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         <div
-          className={`relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br ${category.gradient}`}
+          className={`shadow-soft relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br ${category.gradient}`}
         >
           <svg
             viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ export default function ArticuloDetallePage() {
             {category.label}
           </span>
           {item.views >= 30 && (
-            <span className="absolute right-4 top-4 rounded-md bg-gradient-to-r from-accent to-accent-2 px-3 py-1.5 text-xs font-bold text-accent-foreground">
+            <span className="absolute right-4 top-4 rounded-md bg-accent-mint px-3 py-1.5 text-xs font-bold text-black/80">
               Popular
             </span>
           )}
@@ -104,7 +104,7 @@ export default function ArticuloDetallePage() {
             </p>
           </div>
 
-          <div className="glass rounded-xl border-l-2 border-accent px-5 py-4">
+          <div className="shadow-soft rounded-xl border border-border border-l-2 border-l-accent bg-surface px-5 py-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-accent">
               Busca a cambio
             </p>

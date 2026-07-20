@@ -2,7 +2,7 @@ import ItemForm from "@/components/ItemForm";
 
 export default function PublicarPage() {
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-10 px-6 py-16">
+    <div className="animate-in mx-auto flex w-full max-w-lg flex-1 flex-col gap-10 px-6 py-16">
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
           Nuevo artículo

@@ -14,7 +14,7 @@ export default function ItemCard({
   return (
     <Link
       href={`/articulo/${item.id}`}
-      className="glow-hover glass group flex flex-col overflow-hidden rounded-2xl"
+      className="lift-hover shadow-soft group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface hover:border-accent/40"
     >
       <div
         className={`relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-gradient-to-br ${category.gradient}`}
@@ -42,7 +42,7 @@ export default function ItemCard({
           </span>
         ) : (
           item.views >= 30 && (
-            <span className="absolute right-3 top-3 rounded-md bg-gradient-to-r from-accent to-accent-2 px-2 py-1 text-[10px] font-bold text-accent-foreground">
+            <span className="absolute right-3 top-3 rounded-md bg-accent-mint px-2 py-1 text-[10px] font-bold text-black/80">
               Popular
             </span>
           )
