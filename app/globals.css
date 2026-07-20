@@ -2,16 +2,16 @@
 
 /* Design system — premium dashboard (Linear x Vercel) */
 :root {
-  --background: #f7f7fb;
-  --foreground: #12121a;
-  --accent: #6c5ce7;
-  --accent-2: #2f6fed;
+  --background: #f5f2e8;
+  --foreground: #15140f;
+  --accent: #2f6fed;
+  --accent-2: #0ea5c9;
   --accent-mint: #0ea678;
   --accent-foreground: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f1f1f8;
-  --border: #e3e4ee;
-  --muted: #6b6d80;
+  --surface-2: #efece0;
+  --border: #e1ddcf;
+  --muted: #6f6a5d;
 }
 
 @theme inline {
@@ -32,15 +32,15 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #08090d;
-    --foreground: #f4f5fa;
-    --accent: #8b7cf6;
-    --accent-2: #4f8cff;
+    --foreground: #f2ede0;
+    --accent: #4f8cff;
+    --accent-2: #38bdf8;
     --accent-mint: #22e6a8;
-    --accent-foreground: #ffffff;
-    --surface: #0f1015;
-    --surface-2: #16171d;
-    --border: #212229;
-    --muted: #9294a3;
+    --accent-foreground: #08090d;
+    --surface: #101014;
+    --surface-2: #17161b;
+    --border: #232128;
+    --muted: #96938a;
   }
 }
 

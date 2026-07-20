@@ -25,7 +25,7 @@ type ButtonProps = ButtonAsLink | ButtonAsButton;
 
 const VARIANT_CLASSES: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "lift-hover shadow-accent shadow-accent-hover bg-gradient-to-r from-accent to-accent-2 text-accent-foreground",
+    "lift-hover shadow-soft bg-foreground text-background hover:opacity-90",
   secondary:
     "lift-hover border border-border bg-surface text-foreground hover:border-accent/50 hover:bg-surface-2",
 };
